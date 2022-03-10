@@ -1,0 +1,82 @@
+[{
+    "level": 1,
+    "Num": 5,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 2,
+    "Obs_2Num": 2,
+    "Obs_3Num": 2,
+    "Obs_4Num": 2,
+    "Score": 100
+},
+{
+    "level": 2,
+    "Num": 6,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 1,
+    "Obs_2Num": 1,
+    "Obs_3Num": 1,
+    "Obs_4Num": 1,
+    "Score": 100
+},
+{
+    "level": 3,
+    "Num": 7,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 1,
+    "Obs_2Num": 1,
+    "Obs_3Num": 1,
+    "Obs_4Num": 1,
+    "Score": 100
+},
+{
+    "level": 4,
+    "Num": 8,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 1,
+    "Obs_2Num": 1,
+    "Obs_3Num": 1,
+    "Obs_4Num": 1,
+    "Score": 100
+},
+{
+    "level": 5,
+    "Num": 9,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 1,
+    "Obs_2Num": 1,
+    "Obs_3Num": 1,
+    "Obs_4Num": 1,
+    "Score": 100
+},
+{
+    "level": 6,
+    "Num": 10,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 1,
+    "Obs_2Num": 1,
+    "Obs_3Num": 1,
+    "Obs_4Num": 1,
+    "Score": 100
+},
+{
+    "level": 7,
+    "Num": 11,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 1,
+    "Obs_2Num": 1,
+    "Obs_3Num": 1,
+    "Obs_4Num": 1,
+    "Score": 100
+},
+{
+    "level": 8,
+    "Num": 12,
+    "MapPath": "map/Level_1",
+    "Obs_1Num": 1,
+    "Obs_2Num": 1,
+    "Obs_3Num": 1,
+    "Obs_4Num": 1,
+    "Score": 100
+}
+
+]

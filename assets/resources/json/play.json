@@ -1,0 +1,32 @@
+[{
+    "PlayerID": 0,
+    "Stretch": 0.5,
+    "Pull": 1000
+},
+{
+    "PlayerID": 1,
+    "Stretch": 0.6,
+    "Pull": 2000
+},
+{
+    "PlayerID": 2,
+    "Stretch": 0.7,
+    "Pull": 3000
+},
+{
+    "PlayerID": 3,
+    "Stretch": 0.8,
+    "Pull": 4000
+},
+{
+    "PlayerID": 4,
+    "Stretch": 0.9,
+    "Pull": 5000
+},
+{
+    "PlayerID": 5,
+    "Stretch": 1,
+    "Pull": 6000
+}
+
+]
