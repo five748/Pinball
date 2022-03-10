@@ -5,6 +5,9 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+const globalData = require("./GlobalData");
+const userLogin = require("./UserLogin");
+
 cc.Class({
     extends: cc.Component,
 
@@ -30,6 +33,9 @@ cc.Class({
         this.node.on('gameFail', function ( event ) {
             self.gameFail(self);
         });
+        this.node.on("pushScore",function(event){
+            self.pushScore();
+        }),
 
         cc.director.getCollisionManager().enabled = true;
         cc.director.getPhysicsManager().enabled = true;
@@ -47,6 +53,13 @@ cc.Class({
     gameSucceed(self){
         self.PopWindow.getComponent('PopWindow').showDes(0)
     },
+
+
+    
+    pushScore(score){
+        globalData._allScore += score;
+        userLogin.submitScore(globalData._allScore)
+    }
 
 
     
