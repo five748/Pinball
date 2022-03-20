@@ -1,6 +1,6 @@
 var wxShareTitle = "一起跟我去打病毒吧";
 var wxFlauntTitle = "不好意思又又又破纪录了";
-var globalData = require('globalData')
+var globalData = require('GlobalData')
 
 //const gamesystem = require('./gamesystem');
 var userLogin = {

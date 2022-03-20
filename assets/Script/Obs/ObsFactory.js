@@ -23,7 +23,8 @@ cc.Class({
 
         obsParent: [cc.Node],
         targetNode: cc.Node,
-        ObsTypeNum : [cc.Label]
+        ObsTypeNum : [cc.Label],
+        obsS : new Array()
     },
 
 
@@ -48,32 +49,33 @@ cc.Class({
     //-------------------------------------------------------------------------------------
 
 
-    start() {
-        this.node.on('loadObs', function (event) {
-            self.getObs(event.getUserData);
-        });
-    },
+    // start() {
+    //     this.node.on('loadObs', function (event) {
+    //         self.getObs(event.getUserData);
+    //     });
+    // },
 
-    getObs(ObsData) {
-        let _obsData = ObsData.split("|");
-        for (let i = 0; i < _obsData.length; i++) {
-            let _obsdata = _obsData[i].split(",");
-            this._instantiateObs(_obsdata[0], _obsdata[1]);
-        }
-    },
+    // getObs(ObsData) {
+    //     let _obsData = ObsData.split("|");
+    //     for (let i = 0; i < _obsData.length; i++) {
+    //         let _obsdata = _obsData[i].split(",");
+    //         this._instantiateObs(_obsdata[0], _obsdata[1]);
+    //     }
+    // },
 
     //加载障碍物
     loadObs(parent, area, level) {
         for (let i = 0; i < 4; i++) {
-            this._instantiateObs(i,area , parent)
+            this.obsS.push(this._instantiateObs(i,area , parent)) 
         }
         this.refreshObsNum(level)
-
+        console.log(this.obsS)
     },
 
     _instantiateObs(index,area,parent) {
         let obs = Tool._loadPrefab(this.obs[index], parent)
         obs.getComponent("ObsMoveBase")._initData(area, this.obsParent[index],this,index);
+        return obs
     },
 
 });

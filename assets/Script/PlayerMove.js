@@ -18,8 +18,8 @@ cc.Class({
         circleRadius : 1,
         carspeed:200,
         radian:0,
-        maxDistance : 350,
-        minDistance : 150,
+        maxDistance : 200,
+        minDistance : 0,
         arrow_height : 0,
         arrow_width : 0,
         _touchProint : cc.v2(0,0),
@@ -28,7 +28,7 @@ cc.Class({
         _speed_x : 0,
         _speed_y : 0,
         _addDistance : 0,
-        backGround : cc.Node,
+        _backGround : cc.Node,
         _num : 0, //碰撞次数
         _level : 0, //当前关卡
         map : [cc.Prefab],
@@ -43,46 +43,23 @@ cc.Class({
         _pull : 0,   //拉力
         tail : cc.MotionStreak,
         obsFarme : cc.Node,
-        canvas : cc.Node
+        canvas : cc.Node,
+        gameManage : null
         
     },
 
-    onLoad(){
-        this.initData();
-    },
-
-    start () {
+    initData(pos,backGround,gameManage){
         this.initArrow();
-        //this.touchMove();
-       
-    },
-
-    update(dt){
-        if(this._gameisScueed == false){
-            this._gameSucceed += dt;
-            if(this._gameSucceed >= 2){
-                this.node.dispatchEvent(new cc.Event.EventCustom('gameSucceed', true))
-                this._gameSucceed = 0;
-                this._gameisScueed = true;
-            } 
-        }
-
-    },
-
-    initData(){
-        this._level = GlobalData._level;
-        this._num = GlobalData.levelJson[this._level].Num;
-        this.circleRadius = 38;
-        if(this._self_map != null){
-            this._self_map.destroy();
-        }
-        this._self_map = Tool._loadPrefab(this.map[this._level],this.node.parent)
-        let area = this._self_map.getChildByName("area")
-        this.canvas.getComponent("ObsFactory").loadObs(this._self_map,area,this._level)
-        //this.gameManage.ObsFactory.loadObs(this._self_map,x)
+        this.rigidbody.gravityScale = 0
+        this._backGround = backGround
+        this.gameManage = gameManage
+        this._num = gameManage._num
+        let _pos =pos
+        this.node.position = cc.v2(_pos[0],_pos[1]);
         
-
-
+        this.arrow.active = false;
+        this.circleRadius = 38;
+        //this.gameManage.ObsFactory.loadObs(this._self_map,x)
         //////////读表设置球的属性/////////////////
         this.playerSprite.spriteFrame = this.player_Spr[GlobalData._SelectID];
         this.collider.restitution = GlobalData.playData[GlobalData._SelectID].Stretch;
@@ -104,61 +81,70 @@ cc.Class({
 
     },
 
-
-    touchMove(){
-        let self = this;
-        
-        this.backGround.on(cc.Node.EventType.TOUCH_START,(event)=>{
-            self._touchProint = self.worldPosToLocalPos(self.node,event.getLocation());
-        })
-        this.backGround.on(cc.Node.EventType.TOUCH_MOVE,(event)=>{
-            let x = self.worldPosToLocalPos(self.node,event.getLocation());
-            self.circleMove(x,self);
-        })
-        this.backGround.on(cc.Node.EventType.TOUCH_END,(event)=>{
-            self.shootPlayer(self);
-        })
-        this.backGround.on(cc.Node.EventType.TOUCH_CANCEL,(event)=>{
-            self.arrow.setContentSize(self.arrow_width,self.arrow_height)
-        })
+    startTouch(event){
+        if(this.gameManage.startGame){
+        this.arrow.active = true;
+        let pos = this.worldPosToLocalPos(this.node,event.getLocation());
+        this._touchProint =cc.v2(pos.x,pos.y-300)
+        }
     },
+    moveTouch(event){
+        let _pos = this.worldPosToLocalPos(this.node,event.getLocation());
+        let pos = cc.v2(_pos.x,_pos.y-300)
+        this.circleMove(pos,this);
+    },
+    endTouch(){
+        if(this.gameManage.startGame){
+            this.shootPlayer(this);
+        }   
+    },
+    cancelTouch(){
+        this.arrow.setContentSize(this.arrow_width,this.arrow_height)
+    },
+   
 
+    
 
     //每次碰撞检测球的速度，如果速度过小，就取消弹性，并且结束游戏
     setPlayerCollider(other){
         
-        // let self_lineSpeed = this.rigidbody.linearVelocity;
-        // let selfSpeed = Math.sqrt(self_lineSpeed.x * self_lineSpeed.x + self_lineSpeed.y * self_lineSpeed.y)
-        // if(selfSpeed <= 400){
-        //     this.collider.restitution = 0
-        //     this.collider.apply()
-        //     this.node.dispatchEvent(new cc.Event.EventCustom('gameOver', true))
+        let self_lineSpeed = this.rigidbody.linearVelocity;
+        let selfSpeed = Math.sqrt(self_lineSpeed.x * self_lineSpeed.x + self_lineSpeed.y * self_lineSpeed.y)
+        
 
-        //     // this.node.emit("gameOver",function(event){
-        //     //     msg : "游戏结束"
-        //     // })
-        //     return;
-        // }
-        // this._num -= 1;
-        // if(this._num <= 0){
-        //     //this.addLevel();
-        //     if (other.group != "well") return;
+        this._num -= 1;
+        if(this._num <= 0){
+            //this.addLevel();
+            if (other.group != "well") return;
             
-        //     let anim_boom =  Tool._loadPrefab(this.anim_Node,other)
-        //     anim_boom.getComponent(cc.Animation).play();
-        //     this._gameisScueed = false
-        //     anim_boom.getComponent(cc.Animation).scheduleOnce(function() {
-        //         // 这里的 this 指向 component
-        //         other.destroy();
-        //     }, 0.29);
-        //     this._teamScore += 100;
-        // }
+            let anim_boom =  Tool._loadPrefab(this.anim_Node,other)
+            anim_boom.getComponent(cc.Animation).play();
+            this.gameManage._gameisScueed = false
+            anim_boom.getComponent(cc.Animation).scheduleOnce(function() {
+                // 这里的 this 指向 component
+                other.destroy();
+            }, 0.29);
+            return;
+        }
+
+        if(selfSpeed <= 400 ||other.group == "gameOver"){
+            this.collider.restitution = 0
+            this.collider.apply()
+            this.node.dispatchEvent(new cc.Event.EventCustom('gameOver', true))
+
+            // this.node.emit("gameOver",function(event){
+            //     msg : "游戏结束"
+            // })
+            return;
+        }
+        console.log("------碰到了-----",this._num)
+        
     },
 
-    addLevel(){
-        GlobalData._level += 1
-        this.initData();
+    removeLine(){
+        this.rigidbody.linearVelocity = 0;
     },
+    
 
     initArrow(){
         this.arrow_width = this.arrow.width;
@@ -171,10 +157,12 @@ cc.Class({
         let distance = index.sub(self._touchProint).mag();
         let hudu = _angle*(Math.PI/180);
         self.radian = hudu;
-        let x = self.circleRadius * Math.cos(self.radian) + self.player.position.x; 
-        let y = self.circleRadius * Math.sin(self.radian) + self.player.position.y;
+        let x = self.circleRadius * Math.cos(self.radian)//+ self.player.position.x; 
+        let y = self.circleRadius * Math.sin(self.radian) //+ self.player.position.y;
         let angle = 360- 180/Math.PI*self.radian;
+        let pos = cc.v2(x, -y)
         self.arrow.position = cc.v2(x, -y);
+
         self.arrow.angle = angle + 90;
         self.setArrow(distance,self);
     },
@@ -209,10 +197,7 @@ cc.Class({
         self.arrow.setContentSize(28,self.arrow.height + self._addDistance)
     },
     
-    playGameOnClick(){
-        this.touchMove();
-        this.obsFarme.active = false;
-    },
+   
     
 
     shootPlayer(self){
@@ -220,6 +205,6 @@ cc.Class({
         self.rigidbody.gravityScale = 10
         let x = self.arrow.position.x * self._addDistance / (self.maxDistance - self.minDistance) * 1000;
         self.rigidbody.applyLinearImpulse(cc.v2((self.arrow.position.x * self._addDistance / (self.maxDistance - self.minDistance) * 1000),(self.arrow.position.y * self._addDistance / (self.maxDistance - self.minDistance) * 1000)), self.rigidbody.getWorldCenter(),true);
-        this.backGround.pauseSystemEvents(true)
+        this._backGround.pauseSystemEvents()
     },
 });

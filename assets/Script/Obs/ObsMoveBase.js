@@ -16,7 +16,7 @@ cc.Class({
         _obsFactory : null,
         _self_type : 0
     },
-    
+
 
     _initData(target,parent,obsFactory,type){
         this._target = target;
@@ -31,6 +31,8 @@ cc.Class({
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this._onTouchEnd, this);
         this._oldPos = this.node.position;
+
+        
     },
 
     _onTouchMove(touchEvent) {
@@ -45,8 +47,8 @@ cc.Class({
          if (this.judgeObsOnNode(this._target,touchEvent)) {
             inTarget = true;
             this.refreshNum()
+            this.node.parent = cc.find("Canvas").getComponent("GameManage").obsParnet
         }
-        console.log(inTarget)
         if (!inTarget) {
             this.node.position = this._oldPos; // 回去
         }
