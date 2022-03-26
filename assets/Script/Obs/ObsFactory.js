@@ -36,11 +36,11 @@ cc.Class({
 
 
     refreshObsNum(level){
-        this.ObsTypeNum[0].string = GlobalData.levelJson[level].Obs_1Num;
-        this.ObsTypeNum[1].string = GlobalData.levelJson[level].Obs_2Num;
+        this.ObsTypeNum[0].string = GlobalData._levelJson[level].Obs_1Num;
+        this.ObsTypeNum[1].string = GlobalData._levelJson[level].Obs_2Num;
 
-        this.ObsTypeNum[2].string = GlobalData.levelJson[level].Obs_3Num;
-        this.ObsTypeNum[3].string = GlobalData.levelJson[level].Obs_4Num;
+        this.ObsTypeNum[2].string = GlobalData._levelJson[level].Obs_3Num;
+        this.ObsTypeNum[3].string = GlobalData._levelJson[level].Obs_4Num;
     },
 
 

@@ -33,6 +33,10 @@ cc.Class({
         obsParnet : cc.Node,
 
         startGame : false,
+        scoreNum : cc.Label,
+        levelNum : cc.Label,
+
+        globalData : null,
     },
 
     start () {
@@ -40,10 +44,13 @@ cc.Class({
     },
 
     initGameData(){
+        globalData = Tool.gameData
+        this._level = globalData._level;
+        console.log(globalData)
+        this._num = globalData._levelJson[this._level].Num;
+        
 
-        this._level = GlobalData._level;
-        this._num = GlobalData.levelJson[this._level].Num;
-        let _pos = GlobalData.levelJson[this._level].playerPos.split(",")
+        let _pos = globalData._levelJson[this._level].playerPos.split(",")
         if(this._self_map != null){
             this._self_map.destroy();
         }
@@ -60,15 +67,27 @@ cc.Class({
 
         this._playerMove.initData(_pos,this.backGround,this)
         this.obsFarme.active = true;
+        this.showScoreLevel();
         
     },
+    showScoreLevel(){
+        this.levelNum.string = globalData._level;
+        this.scoreNum.string = globalData._allScore;
+    },
     addLevel(){
-        GlobalData._level += 1
+        globalData._level += 1
+        this.levelNum.string = globalData._level;
         this.initGameData();
+        this.pushScore( globalData._levelJson[this._level].Score)
     },
     addScore(){
         this._teamScore += 100;
+        console.log(this._teamScore)
+        
     },
+
+
+
     playGameOnClick(){
         this.startGame = true;
         this.touchMove();
@@ -121,7 +140,10 @@ cc.Class({
             self.gameFail(self);
         });
         this.node.on("pushScore",function(event){
-            self.pushScore();
+            self.pushScore(event.getUserData());
+        }),
+        this.node.on("colliderAddScore",function(event){
+            self.addScore();
         }),
 
         cc.director.getCollisionManager().enabled = true;
@@ -130,6 +152,7 @@ cc.Class({
 
     gameStart(self){
         self.addLevel();
+        globalData.save();
     },
     gameFail(self){
         self.initGameData();
@@ -160,8 +183,9 @@ cc.Class({
 
     
     pushScore(score){
-        GlobalData._allScore += score;
-        userLogin.submitScore(GlobalData._allScore)
+        globalData._allScore += score;
+        userLogin.submitScore(globalData._allScore)
+        this.scoreNum.string = globalData._allScore;
     }
 
 

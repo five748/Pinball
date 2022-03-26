@@ -1,3 +1,5 @@
+const globalData = require("./GlobalData");
+var gameData = null;
 module.exports = {
 
 

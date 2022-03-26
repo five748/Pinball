@@ -5,7 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const GlobalData = require("./GlobalData");
+var GlobalData = require("./GlobalData");
 const Tool = require("./Tool");
 const scoreArr = [0,100,200,300,400,500]
 cc.Class({
@@ -22,6 +22,8 @@ cc.Class({
 
 
     onLoad () {
+        //cc.sys.localStorage.clear()
+
         this.readAllJson();
     },
 
@@ -32,15 +34,17 @@ cc.Class({
    
 
     readAllJson(){
+        Tool.gameData = Tool._loadData();
         Tool._initMap("json/level",this)
         Tool._initPlayer("json/play",this)
+        
     },
 
     playGameOnClick(){
+        GlobalData._levelJson = this._levelJson
+        GlobalData._playData = this._playJson
         cc.director.loadScene("game");
-        GlobalData.levelJson = this._levelJson
-        GlobalData.playData = this._playJson
-
+        
     },
 
 

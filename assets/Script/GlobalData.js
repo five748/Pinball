@@ -1,13 +1,14 @@
 const _saveDataKey = 'saveData'
 var _saveData = null
-var levelJson = null
-var playData = null
+var _gameData = null
 
 class SaveData{
     _level = 0;
     _allScore = 0;
     _SelectID = 0;
     _unlockNum = [0,1];
+    _levelJson = null;
+    _playData = null;
 
     save(){
         cc.sys.localStorage.setItem(_saveDataKey, JSON.stringify(this))

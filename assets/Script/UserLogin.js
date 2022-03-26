@@ -23,7 +23,9 @@ var userLogin = {
     downloadingIcons: 0,//正在下载的图片数量
 
 
-
+    onHideGame(){
+        cc.game.on(cc.game.EVENT_HIDE, this.onHide())
+    },
     //目前包含了初始化功能。
     login() {
         var self = userLogin;
@@ -541,6 +543,7 @@ var userLogin = {
 
     onHide() {
         console.log('---------game on hide-------');
+        globalData.save();
         cc.game.pause();
     },
 

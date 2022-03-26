@@ -62,8 +62,8 @@ cc.Class({
         //this.gameManage.ObsFactory.loadObs(this._self_map,x)
         //////////读表设置球的属性/////////////////
         this.playerSprite.spriteFrame = this.player_Spr[GlobalData._SelectID];
-        this.collider.restitution = GlobalData.playData[GlobalData._SelectID].Stretch;
-        this._pull = GlobalData.playData[GlobalData._SelectID].Pull;
+        this.collider.restitution = GlobalData._playData[GlobalData._SelectID].Stretch;
+        this._pull = GlobalData._playData[GlobalData._SelectID].Pull;
 
     },
 
@@ -123,6 +123,9 @@ cc.Class({
             anim_boom.getComponent(cc.Animation).scheduleOnce(function() {
                 // 这里的 this 指向 component
                 other.destroy();
+                let _score = new cc.Event.EventCustom('pushScore', true)
+                _score.setUserData(100)
+                this.node.dispatchEvent(_score)
             }, 0.29);
             return;
         }
