@@ -30,6 +30,7 @@ cc.Class({
         canvas : cc.Node,
         backGround : cc.Node,
         obsParnet : cc.Node,
+        playGameButton : cc.Node,
 
         startGame : false,
         scoreNum : cc.Label,
@@ -65,6 +66,7 @@ cc.Class({
 
         this._playerMove.initData(_pos,this.backGround,this)
         this.obsFarme.active = true;
+        this.playGameOnClick.active = true;
         this.showScoreLevel();
         
     },
@@ -90,7 +92,8 @@ cc.Class({
         this.startGame = true;
         this.touchMove();
         this.obsFarme.active = false;
-        this._player.active = true
+        this._player.active = true;
+        this.playGameButton.active = false;
     },
 
     touchMove(){

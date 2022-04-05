@@ -22,7 +22,7 @@ cc.Class({
 
 
     onLoad () {
-        //cc.sys.localStorage.clear()
+        cc.sys.localStorage.clear()
 
         this.readAllJson();
     },
