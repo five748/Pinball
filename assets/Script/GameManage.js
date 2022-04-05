@@ -5,10 +5,9 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const GlobalData = require("./GlobalData");
 const Tool = require("./Tool");
 const userLogin = require("./UserLogin");
-
+var globalData = null
 cc.Class({
     extends: cc.Component,
 
@@ -36,7 +35,6 @@ cc.Class({
         scoreNum : cc.Label,
         levelNum : cc.Label,
 
-        globalData : null,
     },
 
     start () {
@@ -46,7 +44,7 @@ cc.Class({
     initGameData(){
         globalData = Tool.gameData
         this._level = globalData._level;
-        console.log(globalData)
+        console.log(Tool.gameData)
         this._num = globalData._levelJson[this._level].Num;
         
 

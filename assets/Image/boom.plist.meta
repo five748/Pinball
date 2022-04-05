@@ -1,7 +1,6 @@
 {
-  "ver": "1.2.6",
+  "ver": "1.2.4",
   "uuid": "a4a2410e-fddd-42a5-b419-3cfff1311135",
-  "importer": "sprite-atlas",
   "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
   "size": {
     "width": 463,
@@ -10,9 +9,8 @@
   "type": "Texture Packer",
   "subMetas": {
     "image 1.png": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "1e1703ff-4274-4cdb-9a63-a83639b44276",
-      "importer": "sprite-frame",
       "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -33,9 +31,8 @@
       "subMetas": {}
     },
     "image 2.png": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "fdcc3fb2-46c1-45e1-a24e-38e13c50fbf1",
-      "importer": "sprite-frame",
       "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -56,9 +53,8 @@
       "subMetas": {}
     },
     "image 3.png": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "be6c746b-a8e5-4271-ae5f-73c85fda9841",
-      "importer": "sprite-frame",
       "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -79,9 +75,8 @@
       "subMetas": {}
     },
     "image 4.png": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "c609cbae-9214-4aa2-bcea-6b7b1c1cb935",
-      "importer": "sprite-frame",
       "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -102,9 +97,8 @@
       "subMetas": {}
     },
     "image 5.png": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "07a4b04b-2ac8-40d0-add3-1e6ef20317a4",
-      "importer": "sprite-frame",
       "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -125,9 +119,8 @@
       "subMetas": {}
     },
     "image 6.png": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "f3438683-b122-44db-902c-1a1b6540b443",
-      "importer": "sprite-frame",
       "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -148,9 +141,8 @@
       "subMetas": {}
     },
     "image 7.png": {
-      "ver": "1.0.6",
+      "ver": "1.0.4",
       "uuid": "73a2c96e-1c41-4d3a-8ae7-b2d512398c41",
-      "importer": "sprite-frame",
       "rawTextureUuid": "af049191-616c-4f43-b139-2ce8adba1b8f",
       "trimType": "auto",
       "trimThreshold": 1,

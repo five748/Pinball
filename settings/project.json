@@ -30,7 +30,18 @@
       false
     ]
   ],
-  "excluded-modules": [],
+  "excluded-modules": [
+    "DragonBones",
+    "Toggle",
+    "TiledMap",
+    "VideoPlayer",
+    "WebView",
+    "3D",
+    "3D Primitive",
+    "3D Physics/cannon.js",
+    "3D Physics/Builtin",
+    "3D Particle"
+  ],
   "group-list": [
     "default",
     "well",
@@ -64,5 +75,6 @@
   },
   "migrate-history": [
     "cloud-function"
-  ]
+  ],
+  "last-module-event-record-time": 1649077352873
 }

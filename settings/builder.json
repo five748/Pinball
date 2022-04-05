@@ -7,8 +7,8 @@
     "upsideDown": false
   },
   "packageName": "org.cocos2d.helloworld",
-  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
-  "title": "hello_world",
+  "startScene": "4966dcb5-3845-49e9-8f29-ef63336a2ef0",
+  "title": "Pinball",
   "webOrientation": "auto",
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
@@ -22,34 +22,35 @@
   "zipCompressJs": true,
   "fb-instant-games": {},
   "android": {
-    "packageName": "org.cocos2d.demo",
-    "REMOTE_SERVER_ROOT": ""
+    "REMOTE_SERVER_ROOT": "",
+    "packageName": "org.cocos2d.demo"
   },
   "ios": {
-    "packageName": "org.cocos2d.demo",
     "REMOTE_SERVER_ROOT": "",
-    "ios_enable_jit": true
+    "ios_enable_jit": true,
+    "packageName": "org.cocos2d.demo"
   },
   "mac": {
-    "packageName": "org.cocos2d.demo",
     "REMOTE_SERVER_ROOT": "",
-    "width": 1280,
-    "height": 720
+    "height": 720,
+    "packageName": "org.cocos2d.demo",
+    "width": 1280
   },
   "win32": {
     "REMOTE_SERVER_ROOT": "",
-    "width": 1280,
-    "height": 720
+    "height": 720,
+    "width": 1280
   },
   "android-instant": {
-    "packageName": "org.cocos2d.demo",
     "REMOTE_SERVER_ROOT": "",
-    "pathPattern": "",
-    "scheme": "https",
     "host": "",
-    "skipRecord": false,
-    "recordPath": ""
+    "packageName": "org.cocos2d.demo",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
   },
   "appBundle": false,
-  "agreements": {}
+  "agreements": {},
+  "includeSDKBox": false
 }

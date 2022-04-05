@@ -95,6 +95,19 @@ cc.Class({
             }
         }
     },
+    //打开/关闭开放数据域,同时获取好友赠送的金币
+    changeOpenArea() {
+
+        cc.find("Canvas/background/RankNode").active = true
+        window.wx.postMessage({
+            messageType: 1,
+            MAIN_MENU_NUM: "x1"
+        });
+    },
+    //关闭开放数据域
+    closeOpenArea() {
+        cc.find("Canvas/background/RankNode").active = false
+    },
 
     
 
