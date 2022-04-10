@@ -31,10 +31,12 @@ cc.Class({
         backGround : cc.Node,
         obsParnet : cc.Node,
         playGameButton : cc.Node,
+        checkPointNode :cc.Node,
 
         startGame : false,
         scoreNum : cc.Label,
         levelNum : cc.Label,
+
 
     },
 
@@ -67,16 +69,18 @@ cc.Class({
         this._playerMove.initData(_pos,this.backGround,this)
         this.obsFarme.active = true;
         this.playGameOnClick.active = true;
+        this.playGameButton.active = true;
+
         this.showScoreLevel();
         
     },
     showScoreLevel(){
-        this.levelNum.string = globalData._level;
+        this.changeGameCheckPoint(globalData._level+1);
         this.scoreNum.string = globalData._allScore;
     },
     addLevel(){
         globalData._level += 1
-        this.levelNum.string = globalData._level;
+        this.changeGameCheckPoint(globalData._level+1);
         this.initGameData();
         this.pushScore( globalData._levelJson[this._level].Score)
     },
@@ -96,6 +100,9 @@ cc.Class({
         this.playGameButton.active = false;
     },
 
+    
+    
+
     touchMove(){
         this.backGround.resumeSystemEvents()
         let self = this;
@@ -113,6 +120,27 @@ cc.Class({
             self._playerMove.cancelTouch();
         })
     },
+
+    //设置游戏内关卡显示
+    changeGameCheckPoint: function (level) {
+        let node_checkPoint = this.checkPointNode
+        if (level == 1) {
+            node_checkPoint.getChildByName('leftCheckPointSpr').active = false
+            node_checkPoint.getChildByName('leftCheckPointLabel').active = false
+
+            node_checkPoint.getChildByName('centerCheckPointLabel').getComponent(cc.Label).string = level
+            node_checkPoint.getChildByName('rightCheckPointLabel').getComponent(cc.Label).string = level + 1
+        }
+        else {
+            node_checkPoint.getChildByName('leftCheckPointSpr').active = true
+            node_checkPoint.getChildByName('leftCheckPointLabel').active = true
+
+            node_checkPoint.getChildByName('leftCheckPointLabel').getComponent(cc.Label).string = level - 1
+            node_checkPoint.getChildByName('centerCheckPointLabel').getComponent(cc.Label).string = level
+            node_checkPoint.getChildByName('rightCheckPointLabel').getComponent(cc.Label).string = level + 1
+        }
+    },
+
     update(dt){
         if(this._gameisScueed == false){
             this._gameSucceed += dt;
@@ -154,6 +182,7 @@ cc.Class({
     gameStart(self){
         self.addLevel();
         globalData.save();
+
     },
     gameFail(self){
         self.initGameData();
@@ -179,6 +208,7 @@ cc.Class({
         }
         this.obsFactory.obsS = new Array();
         self.PopWindow.getComponent('PopWindow').showDes(0)
+
     },
 
 

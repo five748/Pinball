@@ -31,7 +31,6 @@ cc.Class({
         _backGround : cc.Node,
         _num : 0, //碰撞次数
         _level : 0, //当前关卡
-        map : [cc.Prefab],
         _self_map : null,
         anim_Node : cc.Prefab,
         _gameSucceed : 0,
@@ -44,7 +43,12 @@ cc.Class({
         tail : cc.MotionStreak,
         obsFarme : cc.Node,
         canvas : cc.Node,
-        gameManage : null
+        gameManage : null,
+
+        touchNum : 0,
+        angleBang : cc.Node,
+        bangBall : cc.Node,
+        OffMove_Anim : null,
         
     },
 
@@ -86,18 +90,50 @@ cc.Class({
         this.arrow.active = true;
         let pos = this.worldPosToLocalPos(this.node,event.getLocation());
         this._touchProint =cc.v2(pos.x,pos.y-300)
+        this.touchNum += 1;
         }
+        if(this.touchNum == 2){
+            this.OffMove_Anim.stop()
+           
+            console.log("坐标"+this.bangBall.position)  
+        }
+         
     },
+
     moveTouch(event){
+        if( this.touchNum < 2){
+        console.log(this.touchNum)
         let _pos = this.worldPosToLocalPos(this.node,event.getLocation());
         let pos = cc.v2(_pos.x,_pos.y-300)
         this.circleMove(pos,this);
+        }
+        
     },
     endTouch(){
-        if(this.gameManage.startGame){
-            this.shootPlayer(this);
-        }   
+        if(this.touchNum == 1){
+            this.angleBang.active = true
+            this.bangBallMove()
+            
+        }
+        // if(this.gameManage.startGame){
+        //     this.shootPlayer(this);
+        // }
+         
     },
+
+    bangBallMove(){
+        this.OffMove_Anim = cc.tween(this.bangBall)
+            .repeatForever(
+                cc.tween()
+                    .to(0, { position:cc.v3(0,0,0)})
+                    .to(0.5, { position:cc.v3(-95,0,0) })
+                    .to(1, { position:cc.v3(0,0,0)})
+                    .to(0.5, { position:cc.v3(95,0,0)})
+                    .to(1, { position:cc.v3(0,0,0)})
+            )
+            .start()
+    },
+
     cancelTouch(){
         this.arrow.setContentSize(this.arrow_width,this.arrow_height)
     },
@@ -173,6 +209,8 @@ cc.Class({
     worldPosToLocalPos(node , position){
         return node.convertToNodeSpaceAR(position);
     },
+
+
     
 
     getVector(vec_1,vec_2){
@@ -204,10 +242,11 @@ cc.Class({
     
 
     shootPlayer(self){
-        self.arrow.active = false;
-        self.rigidbody.gravityScale = 10
-        let x = self.arrow.position.x * self._addDistance / (self.maxDistance - self.minDistance) * 1000;
-        self.rigidbody.applyLinearImpulse(cc.v2((self.arrow.position.x * self._addDistance / (self.maxDistance - self.minDistance) * 1000),(self.arrow.position.y * self._addDistance / (self.maxDistance - self.minDistance) * 1000)), self.rigidbody.getWorldCenter(),true);
-        this._backGround.pauseSystemEvents()
+        // self.arrow.active = false;
+        // self.rigidbody.gravityScale = 10
+        // let x = self.arrow.position.x * self._addDistance / (self.maxDistance - self.minDistance) * 1000;
+        // self.rigidbody.applyLinearImpulse(cc.v2((self.arrow.position.x * self._addDistance / (self.maxDistance - self.minDistance) * 1000),(self.arrow.position.y * self._addDistance / (self.maxDistance - self.minDistance) * 1000)), self.rigidbody.getWorldCenter(),true);
+        //this.rigidbody.angularVelocity = -1000
+        // this._backGround.pauseSystemEvents()
     },
 });
